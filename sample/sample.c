@@ -30,6 +30,8 @@ int main()
     skiplistTraversal(list2);
 	// TODO
     //skiplist *mergedList = skiplistMerge(list1, list2);
+	skiplistFree(list1);
+	skiplistFree(list2);
 
     return 0;
 }

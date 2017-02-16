@@ -8,9 +8,6 @@ static skiplistNode *skiplistNodeCreate(int level, int val) {
     return node;
 };
 
-static void skiplistNodeFree(skiplistNode *node, int level) {
-}
- 
 skiplist *skiplistCreate() {
     skiplist *list = (skiplist *)calloc(1, sizeof(skiplist));
     if (!list) return NULL;
@@ -29,6 +26,13 @@ skiplist *skiplistCreate() {
 
 void skiplistFree(skiplist *list) {
     if (!list) return;
+	skiplistNode *node = list->head, *forward;
+	while (node) {
+		forward = node->level[0].forward;
+		free(node);
+		node = forward;
+	}
+	free(list);
 }
 
 static int skiplistRandomLevel() {
